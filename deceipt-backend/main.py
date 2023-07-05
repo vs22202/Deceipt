@@ -3,7 +3,6 @@ from flask_cors import CORS
 import os
 from werkzeug.utils import secure_filename
 from projectNew import process_receipt
-from test import parrFunC
 app = Flask(__name__)
 CORS(app)
 os.makedirs(os.path.join(app.instance_path, 'input'), exist_ok=True)
@@ -33,8 +32,8 @@ def uploadImage():
 def getImage(filename):
   print(os.path.join(app.instance_path, 'output',filename),flush=True)
   return send_file(os.path.join(app.instance_path, 'output',filename))
-@app.route("/test",methods=["GET"])
-def test():
-  return parrFunC()
+
+
+
 if __name__ == "__main__":
-  app.run()
+  app.run(debug = True)
