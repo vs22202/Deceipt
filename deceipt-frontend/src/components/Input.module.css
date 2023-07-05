@@ -1,0 +1,48 @@
+.fieldContainer{
+    display: flex;
+    align-items: center;
+    gap:0.5em;
+    row-gap: 0;
+
+}
+.field{
+    position: relative;
+    border-bottom: 1px solid rgba(var(--primary-color),0.6);
+    font-size: 1em;
+    font-weight: 500;
+    width: 100%;
+    isolation: isolate;
+}
+.field>input::placeholder{
+    opacity:0;
+}
+.field>input:focus::placeholder{
+    opacity:1;
+}
+.field>input:focus + label , .field>input:not(:placeholder-shown) + label {
+    top:-70%
+}
+.field>input{
+    position: relative;
+    background-color: transparent;
+    width: 100%;
+    border:0;
+}
+.field>label{
+    position: absolute;
+    opacity: 0.7;
+    top:0;
+    left:0;
+    z-index:-1;
+    transition: top 0.2s ease-in;
+}
+.error{
+    font-size: 0.85em;
+    color:rgba(var(--danger-color),1);
+}
+.viewPassword{
+    position: absolute;
+    top:-25%;
+    right:0;
+    cursor: pointer;
+}

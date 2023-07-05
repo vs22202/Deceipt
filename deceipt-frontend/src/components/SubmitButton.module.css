@@ -1,0 +1,17 @@
+.submitBtn{
+    width: 100%;
+    background-color: rgba(var(--primary-color),1);
+    color:rgba(var(--secondary-color),1);
+    font-size: 1em;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    padding-block: 0.5em;
+    border:0;
+    border-radius: 0.4em;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+.submitBtn:hover{
+    background-color: rgba(var(--primary-light-color),1);
+    color:black;
+}

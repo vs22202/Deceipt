@@ -1,0 +1,23 @@
+.mutedLink{
+    text-decoration: none;
+    color:rgba(var(--primary-color),0.7);
+    font-size: 0.8em;
+    font-weight: 600;
+    position: relative;
+    width: max-content;
+    cursor: pointer;
+    transition: color 0.25s;
+}
+.mutedLink:hover{
+    color:rgba(var(--primary-color),1);
+}
+.underline{
+    content:'';
+    position: absolute;
+    bottom:-15%;
+    left:0;
+    height:2px;
+    width:0%;
+    background-color: rgba(var(--primary-color),1);
+
+}
