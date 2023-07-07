@@ -11,7 +11,7 @@ Python-Flask
 
 ## Clone the Git Repository
 ```
-git clone
+git clone https://github.com/vs22202/Deceipt.git
 cd Deceipt
 ```
 ## Start Frontend
