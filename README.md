@@ -1,5 +1,5 @@
 # Deceipt
-A receipt digitizer to help with tax filing
+Deceipt is designed to convert your physical receipt into digital form by extracting the date and price information. The motivation behind this project was to ease small business owners with filing expenses for taxes.
 
 # Front-End
 React.js
