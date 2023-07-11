@@ -18,7 +18,7 @@ const Upload = ({ email, uid }) => {
       const filename = email + "__" + uuid().slice(0, 8) +'.'+ image.name.split('.').pop();
       formdata.append("images", image, filename);
     });
-    fetch("http://localhost:5000/uploadImages", {
+    fetch("/api/uploadImages", {
       method: "POST",
       body: formdata,
     }).then(res=> res.json()).then((res) => {
