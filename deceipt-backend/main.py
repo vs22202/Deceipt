@@ -9,7 +9,7 @@ os.makedirs(os.path.join(app.instance_path, 'input'), exist_ok=True)
 os.makedirs(os.path.join(app.instance_path, 'output'), exist_ok=True)
 os.makedirs(os.path.join(app.instance_path, 'ocr'), exist_ok=True)
 
-@app.route("/uploadImages",methods=["POST"])
+@app.route("/api/uploadImages",methods=["POST"])
 def uploadImage():
   if request.method == "POST":
     files = request.files.getlist("images")
@@ -28,7 +28,7 @@ def uploadImage():
         print(f"API Failed {i}",flush=True)
     return results
 
-@app.route("/getImage/<filename>",methods=['GET'])
+@app.route("/api/getImage/<filename>",methods=['GET'])
 def getImage(filename):
   print(os.path.join(app.instance_path, 'output',filename),flush=True)
   return send_file(os.path.join(app.instance_path, 'output',filename))
