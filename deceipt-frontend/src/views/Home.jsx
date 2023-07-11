@@ -15,7 +15,7 @@ const Home = ({ uid }) => {
           <td>${result.name}</td>
           <td>${result.date}</td>
           <td>${result.total}</td>
-          <td><a href="http://localhost:5000/getImage/${file}" target="_blank">View Image</a></td>
+          <td><a href="/api/getImage/${file}" target="_blank">View Image</a></td>
         `;
         tableRef.current.appendChild(row);
         setTableFields(true);
