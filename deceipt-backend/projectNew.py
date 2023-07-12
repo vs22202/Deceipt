@@ -3,10 +3,10 @@ import re
 import cv2
 import json
 import numpy as np
-import pytesseract
+#import pytesseract
 from PIL import Image
 from datetime import *
-from pytesseract import Output
+#from pytesseract import Output
 import matplotlib.pyplot as plt
 from skimage.filters import threshold_local
 import requests
@@ -15,7 +15,7 @@ from extractData import extrcat_data
 
 # pytesseract path
 # path = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
-
+#pytesseract.pytesseract.tesseract_cmd = r'/var/www/html/Deceipt/Main/deceipt-backend/.venv/bin/pytesseract'
 # regex patterns for extracting field/info from the bill
 date_pattern = r'([1-9]|0[1-9]|1[0-9]|2[0-9]|3[0-1])(\.|-|/)([1-9]|0[1-9]|1[0-2])(\.|-|/)(d{2}|([0-9][0-9]|19[0-9][0-9]|20[0-9][0-9]))'
 name_pattern = r"^[A-Za-z’. ]+$"
@@ -246,7 +246,7 @@ def get_ocr_image(filename):
     file_name = "instance/output/"+filename
     image = cv2.imread(file_name, cv2.IMREAD_GRAYSCALE)
     ocr_dir = "instance/ocr/"+filename
-    d = pytesseract.image_to_data(image, output_type=Output.DICT)
+    #d = pytesseract.image_to_data(image, output_type=Output.DICT)
     n_boxes = len(d['level'])
     boxes = cv2.cvtColor(image.copy(), cv2.COLOR_BGR2RGB)
     for i in range(n_boxes):
@@ -263,15 +263,15 @@ def extract_data(filename):
     # Remove
     # pytesseract.pytesseract.tesseract_cmd = path
 
-    get_ocr_image(filename)
+    #get_ocr_image(filename)
     file_name = "instance/output/"+filename
     image = cv2.imread(file_name, cv2.IMREAD_GRAYSCALE)
 
-    extracted_text = pytesseract.image_to_string(image)
-    splits = extracted_text.splitlines()
+    #extracted_text = pytesseract.image_to_string(image)
+    #splits = extracted_text.splitlines()
 
-    receipt_ocr = {}
-    receipt_ocr["name"] = find_name(splits)
+    #receipt_ocr = {}
+    #receipt_ocr["name"] = find_name(splits)
     receipt_ocr["date"] = find_date(splits)
     receipt_ocr["total"] = max(find_amounts(splits))
 

@@ -1,12 +1,12 @@
 import requests
-import pytesseract
-from pytesseract import Output
+#import pytesseract
+#from pytesseract import Output
 import cv2
 def get_ocr_image(filename):
     file_name = "instance/output/"+filename
     image = cv2.imread(file_name, cv2.IMREAD_GRAYSCALE)
     ocr_dir = "instance/ocr/"+filename
-    d = pytesseract.image_to_data(image, output_type=Output.DICT)
+    #d = pytesseract.image_to_data(image, output_type=Output.DICT)
     n_boxes = len(d['level'])
     boxes = cv2.cvtColor(image.copy(), cv2.COLOR_BGR2RGB)
     for i in range(n_boxes):
@@ -17,7 +17,7 @@ def get_ocr_image(filename):
     cv2.imwrite(ocr_dir, boxes)
 
 def extrcat_data(filename):
-    get_ocr_image(filename)
+    #get_ocr_image(filename)
     receiptOcrEndpoint = 'https://ocr.asprise.com/api/v1/receipt'
     imageFile = "instance/output/" + filename  # // Modify this to use your own file if necessary
     r = requests.post(receiptOcrEndpoint, data={

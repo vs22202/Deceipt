@@ -3,11 +3,15 @@ from flask_cors import CORS
 import os
 from werkzeug.utils import secure_filename
 from projectNew import process_receipt
-app = Flask(__name__)
+app = Flask(__name__,static_folder='../deceipt-frontend/dist',static_url_path='/')
 CORS(app)
 os.makedirs(os.path.join(app.instance_path, 'input'), exist_ok=True)
 os.makedirs(os.path.join(app.instance_path, 'output'), exist_ok=True)
 os.makedirs(os.path.join(app.instance_path, 'ocr'), exist_ok=True)
+
+@app.route('/')
+def index():
+  return app.send_static_file('index.html')
 
 @app.route("/api/uploadImages",methods=["POST"])
 def uploadImage():
