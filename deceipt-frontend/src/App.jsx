@@ -7,6 +7,7 @@ import Navbar from './views/partials/Navbar'
 import { currentUser, auth } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import Upload from './views/Upload'
+
 function App() {
   const [loggedIn, setLoggedIn] = useState(currentUser || false);
   useEffect(() => {
