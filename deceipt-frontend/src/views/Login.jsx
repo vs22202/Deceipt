@@ -1,14 +1,14 @@
 import React, { useRef, useEffect, useLayoutEffect, useState } from "react";
 import styles from "./Login.module.css";
 import { Icon } from "@iconify/react";
-import { googleLoginUser, loginUser, auth, redirectResult } from "../firebase";
+import { googleLoginUser, loginUser, auth, redirectResult,signupUser } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Input from "../components/Input";
 import MutedLink from "../components/MutedLink";
 import SubmitButton from "../components/SubmitButton";
-import { ReactSVG } from "react-svg";
+import flash_message from "../utils"
 import gsap from "gsap";
 
 const Login = () => {
@@ -18,11 +18,13 @@ const Login = () => {
   const desktopDecorationRef = useRef();
   const [width, setWidth] = useState(window.innerWidth);
   const updateWidth = () => setWidth(window.innerWidth);
+  const [signup,setSignUp] = useState(false)
   const [loading, setLoading] = useState(Boolean(localStorage.getItem("loadingState")) ||false);
   const {
     register,
     handleSubmit,
     setError,
+    reset,
     formState: { errors },
   } = useForm({
     mode: "onChange",
@@ -30,6 +32,7 @@ const Login = () => {
   //window size listener to change navbar 
   useEffect(() => {
     window.addEventListener("resize", updateWidth);
+    localStorage.setItem("loadingState","");
     return () => {
       window.removeEventListener("resize", updateWidth);
     };
@@ -69,8 +72,12 @@ const Login = () => {
     }
   };
   const handleFormSubmit = (data) => {
-    localStorage.setItem("loadingState",true)
-    loginUser(data.email, data.password);    
+    localStorage.setItem("loadingState", true)
+    if (signup) { signupUser(data.email, data.password); flash_message("Signup Sucessful", "info") }
+    else { loginUser(data.email, data.password); flash_message("Login Sucessful", "info") }
+    setSignUp(false)
+    
+    localStorage.setItem("loadingState", "")
   };
   //animation control
   const handleAnimation = async () => {
@@ -90,9 +97,7 @@ const Login = () => {
   };
   //signup Animation
   const handleSignUp = () => {
-    console.log("test");
-    gsap.to(`.${styles.cloud}`, { scale: 20, zIndex: 10, duration: 5 });
-    gsap.to(`.${styles.cloud}`, { scale: 1.8,zIndex:-1 ,duration: 5,delay:6 });
+    setSignUp(!signup);
   };
   return (
     <div className={`${styles.loginPage} ${loading? styles.overlay : ""} `}>
@@ -110,7 +115,7 @@ const Login = () => {
           onSubmit={handleSubmit(handleFormSubmit)}
           ref={loginFormRef}
         >
-          <h3>Login</h3>
+          {signup ? <h3>Sign Up</h3>  : <h3>Login</h3>}
           {errors.root &&
             errors.root.loginError.type?.split("/")[1] === "wrong-password" && (
               <p className={styles.error}>Incorrect Password</p>
@@ -163,7 +168,7 @@ const Login = () => {
           >
             forgot password?
           </MutedLink>
-          <SubmitButton value="Login" />
+          <SubmitButton value={signup ? 'Sign Up' : 'Login'} />
           <div className={styles.verticalDivider}>
             <hr />
             or
@@ -173,7 +178,7 @@ const Login = () => {
             <Icon icon="logos:google-icon" />
             <input
               type="button"
-              value="Login With Google"
+              value={signup ? 'Sign Up With Google' : 'Login With Google'} 
               onClick={async () => {
                 localStorage.setItem("loadingState",true)
                 googleLoginUser();
@@ -183,7 +188,7 @@ const Login = () => {
           <p className={styles.signUpLink}>
             new to deceipt?{" "}
             <MutedLink url="#" onClick={handleSignUp}>
-              Sign Up
+            {signup ? 'Login' : 'Sign Up'}
             </MutedLink>
           </p>
         </form>

@@ -11,7 +11,7 @@ const Navbar = () => {
   const navRef = useRef();
   const [width, setWidth] = useState(window.innerWidth);
   const [loggedIn, setLoggedIn] = useState(currentUser || false);
-  const updateWidth = () => setWidth(window.innerWidth);
+  const updateWidth = () => { location.reload(); setWidth(window.innerWidth); }
   const navigate = useNavigate();
   gsap.registerPlugin(Flip);
 
@@ -160,10 +160,12 @@ const Navbar = () => {
               <img src="src/assets/icons/chevron-down.svg" alt="Chevron Icon" />
             </IconButton>
           </li>
-          <li className={styles.logo}>
+          <li className={styles.logout}>
             <button
-              onClick={() => {
+                onClick={() => {
+                localStorage.setItem("loadingState", "") 
                 signOutUser();
+                 
               }}
             >
               Logout
@@ -217,7 +219,8 @@ const Navbar = () => {
         </ul>
       ) : (
         " "
-      )}
+        )}
+        <div id="flash_container"></div>
     </nav>
   );
 };

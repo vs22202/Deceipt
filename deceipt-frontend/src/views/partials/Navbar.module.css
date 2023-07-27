@@ -47,9 +47,23 @@ ul{
 li{
     position: relative;
 }
-.logo{
-
-    
+.logout>button{
+    width: 100%;
+    background-color: rgba(var(--primary-color),1);
+    color:rgba(var(--secondary-color),1);
+    font-size: 1em;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    padding-block: 0.5em;
+    padding-inline: 0.5em;
+    border:0;
+    border-radius: 0.4em;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+.logout>button:hover{
+    background-color: rgba(var(--primary-light-color),1);
+    color:black;
 }
 .activeLi{
     position: absolute;
@@ -71,3 +85,35 @@ li{
     }
 
 }
+
+#flash_container{
+    display: flex;
+    flex-direction: column;
+    gap:0.5em;
+    position: absolute;
+    top:15%;
+    right:50%;
+    transform: translateX(50%);
+    z-index:10;
+    width: 40%;
+  }
+  .flash{
+    opacity: 0;
+    padding: 0.25em 0.5em;
+    background-color: rgba(var(--light_color),0.95);
+    border: 0.1em solid rgba(var(--primary_color),1);
+    border-radius: 0.25em;
+    display: flex;
+    gap:1em;
+    align-items: center;
+    transition: opacity 200ms ease-in-out;
+  }
+  .flash.error{
+    background-color: rgba(var(--danger_color),0.95);
+  }
+  .flash.info{
+    background-color: rgba(var(--info_color),0.95);
+  }
+  .flash.warning{
+    background-color: rgba(var(--warning_color),0.95);
+  }

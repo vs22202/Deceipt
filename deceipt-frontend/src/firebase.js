@@ -59,6 +59,14 @@ export const loginUser = async (email, password) => {
     });
   return res;
 };
+export const signupUser = async (email, password) => {
+  const res = await createUserWithEmailAndPassword(auth, email, password)
+    .catch((error) => {
+      const errorCode = error.code;
+      return { errorCode };
+    });
+  return res;
+};
 export const signOutUser = async () => {
   const res = await signOut(auth)
     .then(() => {

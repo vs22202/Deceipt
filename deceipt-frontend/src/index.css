@@ -75,7 +75,10 @@ input:focus, textarea:focus, select:focus{
   --secondary-color:247, 243, 237;
   --primary-offset-color:228, 239, 231;
   --primary-light-color:27, 191, 96;
+  --light_color:255,255,255;
   --danger-color:223, 45, 45;
+  --info_color: 148, 255, 148;
+  --warning_color: 248, 242, 179;
 }
 body{
   background-color: rgba(var(--primary-offset-color),1);
